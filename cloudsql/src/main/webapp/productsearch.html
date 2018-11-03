@@ -45,9 +45,9 @@ $(document).ready(function(){
 				method:"GET",
 				data:{inputText:inputText},
 				success:function(json){
-					alert(json);
+					//alert(json);
 					$.each(json, function(key, value){
-						$('#result').append('<li class="list-group-item">'+json.productName+'</li>');
+						$('#result').append('<li class="list-group-item">'+json.name+'</li>');
 					});
 					//$('#productList').fadeIn();
 					//$('#productList').html(json.content);
