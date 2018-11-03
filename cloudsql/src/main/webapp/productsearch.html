@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+ <head>
+	<meta charset="UTF-8">
+	<meta name="Generator" content="EditPlus®">	
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Auto Complete for eCommerce Platform</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head> 
+<body> 
+	<div class="container" style="width:900px">
+		<h3 align="center"> AutoComplete Demo for eCommerce App </h3>
+		<div align="center">
+			<input type="text" name="autoCompleteTxt" id="autoCompleteTxt" class="form-control" placeholder="Search for product here..."/> 
+		</div>
+		<ul class="list-group" id="result"></ul>
+		<div id="productList"></div>
+	</div>
+</body> 
+
+</html>
+
+
+<script>
+//https://www.youtube.com/watch?v=IG4v0CHRlBQ
+$(document).ready(function(){
+	$('#autoCompleteTxt').keyup(function(){
+		var inputText=$(this).val();
+		if(inputText != '')
+		{
+			$.ajax({
+//				url:"https://licenseapi.herokuapp.com/licenses",
+				dataType: "json",
+				crossDomain : false,
+//				url:"https://datazen.katren.ru/calendar/day/",
+				url:"https://cloudsqlservicedemo-dot-pocdemo-221200.appspot.com/search",
+				method:"GET",
+				data:{inputText:inputText},
+				success:function(json){
+					alert(json);
+					$.each(json, function(key, value){
+						$('#result').append('<li class="list-group-item">'+json.productName+'</li>');
+					});
+					//$('#productList').fadeIn();
+					//$('#productList').html(json.content);
+					//$("#productList").addClass("container");
+					//$('#productList').append("<ul class=\"list-group\"><li class=\"list-group-item\">"+json.date+"</li></ul>");
+				}
+			});
+		}
+		else
+		{
+			$('#result').empty();
+		}
+	});
+});
+
+//https://www.youtube.com/watch?v=mZOpvhywT_E
+//P@ssword! - MySQL
+//$(document).ready(function(){
+//	$('#autoCompleteTxt').keyup(function(){
+//		$('#result').html('');
+//		var inputText=$('#autoCompleteTxt').val();
+//		var expression = new RegExp(inputText, "i");
+//		$.getJSON('C:\Users\pparthas\OneDrive - Capgemini\Pradeep\Google Interview\open-data-set-master\products.json?callback=?',function(data){
+//	$.getJSON('	http://api.nobelprize.org/v1/country.json',function(data){
+//			$.each(data, function(key, value){
+//				if(value.name.autoCompleteTxt(expression) != -1){
+//					$('#result').append('<li class="list-group-item">'+value.name+'</li>');
+//				}
+//			});
+//		});
+//	});
+//});
+
+</script>
